@@ -13,12 +13,15 @@ namespace DotnetCoreApipractice.Controllers
             "Banana",
             "Cherry",
             "Date",
-            "Elderberry"
+            "Elderberry",
+            "Mango",
+            "strawberry"
         };
 
         [HttpGet]
         public List<string> Get()
         {
+            Console.WriteLine("Get method called");
             return fruits;
         }
     }

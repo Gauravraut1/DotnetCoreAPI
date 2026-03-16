@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DotnetCoreApipractice.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DotnetCoreApipractice.Controllers
@@ -7,22 +8,18 @@ namespace DotnetCoreApipractice.Controllers
     [ApiController]
     public class FruitAPIController : ControllerBase
     {
-        public List<string> fruits = new List<string>()
+        private readonly AppDbContext _context;
+
+        public FruitAPIController(AppDbContext context)
         {
-            "Apple",
-            "Banana",
-            "Cherry",
-            "Date",
-            "Elderberry",
-            "Mango",
-            "strawberry"
-        };
+            _context = context;
+        }
 
         [HttpGet]
-        public List<string> Get()
+        public IActionResult Get()
         {
-            Console.WriteLine("Get method called");
-            return fruits;
+            var fruits = _context.Fruits.ToList();
+            return Ok(fruits);
         }
     }
 }

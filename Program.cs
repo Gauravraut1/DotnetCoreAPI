@@ -1,12 +1,19 @@
+using Microsoft.EntityFrameworkCore;
+using DotnetCoreApipractice.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+
 //builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen();
+
+//register the DbContext with the dependency injection container in program.cs
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
